@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
-  state = {users: []}
+  state = {data: []}
 
-//  componentDidMount() {
-//    fetch('/users')
-//      .then(res => res.json())
-//      .then(users => this.setState({ users }));
-//  }
 
   componentDidMount() {
     this.timerID = setInterval(
@@ -24,14 +19,29 @@ class App extends Component {
   tick() {
     fetch('/users')
       .then(res => res.json())
-      .then(users => this.setState({ users }));
+      .then(data => this.setState({ data }));
   }
 
   render() {
+    let data_list = [];
+    for(var i in this.state.data){
+      let url = JSON.stringify(this.state.data[i].url)
+      let title = JSON.stringify(this.state.data[i].title)
+      data_list.push(
+        <dl>
+          <dt>Title</dt>
+          <dd>{title}</dd>
+          <dt>URL</dt>
+          <dd>{url}</dd>
+        </dl>
+      );
+    }
+
     return (
       <div className="App">
-        <h1>Users</h1>
-        <h1>{JSON.stringify(this.state.users)}</h1> </div>
+        <h1>Data</h1>
+        <div>{data_list}</div>
+      </div>
     );
   }
 

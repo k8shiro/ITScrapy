@@ -26,3 +26,26 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
       - ./mongo/data/db:/data/db
+
+  node:
+    build:
+      context: ./node
+      args:
+        HTTP_PROXY: ${HTTP_PROXY}
+        HTTPS_PROXY: ${HTTPS_PROXY}
+        http_proxy: ${HTTP_PROXY}
+        https_proxy: ${HTTPS_PROXY}
+        no_proxy: localhost,fess
+    volumes:
+      - ./node:/root/node
+      - /root/node/app/node_modules/
+      - /root/node/app/client/node_modules/
+    ports:
+      - 9000:2999
+      - 9001:3000
+    links:
+      - mongo
+
+
+
+

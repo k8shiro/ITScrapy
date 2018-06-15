@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
     if(!err) {
       console.log("num of item => " + docs.length)
       data = docs;
-      res.json(JSON.stringify(data))
+      res.json(data)
       mongoose.disconnect()  // mongodbへの接続を切断
     } else {
       console.log("find error")
