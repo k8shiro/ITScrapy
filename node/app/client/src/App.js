@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import ScrapyCard from './ScrapyCard'
+import Grid from '@material-ui/core/Grid';
 
 class App extends Component {
   state = {data: []}
@@ -25,22 +27,19 @@ class App extends Component {
   render() {
     let data_list = [];
     for(var i in this.state.data){
-      let url = JSON.stringify(this.state.data[i].url)
-      let title = JSON.stringify(this.state.data[i].title)
+      let url = this.state.data[i].url
+      let img = this.state.data[i].img
+      let title = this.state.data[i].title
       data_list.push(
-        <dl>
-          <dt>Title</dt>
-          <dd>{title}</dd>
-          <dt>URL</dt>
-          <dd>{url}</dd>
-        </dl>
+        <ScrapyCard title={title} url={url} img={img} />
       );
     }
 
     return (
       <div className="App">
-        <h1>Data</h1>
-        <div>{data_list}</div>
+        <Grid container spacing={24}>
+          {data_list}
+        </Grid>
       </div>
     );
   }

@@ -6,6 +6,7 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from pymongo import MongoClient
+from time import sleep
 
 class ScrapyPjPipeline(object):
     def __init__(self):
@@ -30,7 +31,6 @@ class ScrapyPjPipeline(object):
             upsert = True
         ) # linkを検索して、なければ新規作成、あればアップデートする
 
-        print("is_save:@@@@@@@@@@")
-        print(is_save)
-        print("is_save:*************")
+        sleep(3)
+
         return item

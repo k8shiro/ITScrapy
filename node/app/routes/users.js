@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
   mongoose.connect('mongodb://mongoadmin:password@mongo/scrapy?authSource=admin');
 
   var data;
-  mongo_model.find({}, function(err, docs) {
+  mongo_model.find({},{}, {sort:{_id: -1},limit:20}, function(err, docs) {
     if(!err) {
       console.log("num of item => " + docs.length)
       data = docs;

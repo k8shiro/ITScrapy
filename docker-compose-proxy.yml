@@ -4,9 +4,19 @@ services:
     restart: always
     build:
       context: scrapy/.    
-    working_dir: /scrapy/scrapy_pj
+      args:
+        http_proxy: ${PROXY}
+        https_proxy: ${PROXY}
+        HTTP_PROXY: ${PROXY}
+        HTTPS_PROXY: ${PROXY}
+    environment:
+      - http_proxy=${PROXY}
+      - https_proxy=${PROXY}
+      - HTTP_PROXY=${PROXY}
+      - HTTPS_PROXY=${PROXY}
     volumes:
       - ./scrapy/:/scrapy/
+    working_dir: /scrapy/scrapy_pj
     links:
       - mongo
   mongo:
@@ -21,6 +31,12 @@ services:
   node:
     build:
       context: ./node
+      args:
+        HTTP_PROXY: ${HTTP_PROXY}
+        HTTPS_PROXY: ${HTTPS_PROXY}
+        http_proxy: ${HTTP_PROXY}
+        https_proxy: ${HTTPS_PROXY}
+        no_proxy: localhost,fess
     volumes:
       - ./node:/root/node
       - /root/node/app/node_modules/

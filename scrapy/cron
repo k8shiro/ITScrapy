@@ -1,0 +1,5 @@
+50 * * * * cd /scrapy/scrapy_pj; scrapy crawl article_spider -a start_url="https://thinkit.co.jp/" -a allowed_domains="thinkit.co.jp" -a keyword="article" -a tag="news"
+0 * * * * cd /scrapy/scrapy_pj; scrapy crawl article_spider -a start_url="http://www.atmarkit.co.jp/" -a allowed_domains="www.atmarkit.co.jp" -a keyword="articles" -a tag="news"
+10 * * * * cd /scrapy/scrapy_pj; scrapy crawl article_spider -a start_url="http://www.itmedia.co.jp/" -a allowed_domains="www.itmedia.co.jp" -a keyword="articles" -a tag="news"
+20 * * * * cd /scrapy/scrapy_pj; scrapy crawl article_spider -a start_url="https://jp.techcrunch.com/" -a allowed_domains="jp.techcrunch.com" -a keyword="techcrunch" -a tag="news"
+
