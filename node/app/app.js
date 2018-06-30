@@ -4,8 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 var clipRouter = require('./routes/clip');
+
+process.on('uncaughtException', function(err) {
+  console.log(err);
+});
+
 
 var app = express();
 
