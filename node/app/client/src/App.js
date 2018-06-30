@@ -4,8 +4,9 @@ import ScrapyCard from './ScrapyCard'
 import Grid from '@material-ui/core/Grid';
 
 class App extends Component {
-  state = {data: []}
-
+  state = {
+    data: []
+  };
 
   componentDidMount() {
     this.timerID = setInterval(
@@ -19,7 +20,9 @@ class App extends Component {
   }
 
   tick() {
-    fetch('/users')
+    let urlParams = new URLSearchParams(window.location.search);
+    let tag = urlParams.get('tag');
+    fetch('/api/clip?tag=' + tag)
       .then(res => res.json())
       .then(data => this.setState({ data }));
   }
@@ -43,7 +46,6 @@ class App extends Component {
       </div>
     );
   }
-
 }
 
 export default App;

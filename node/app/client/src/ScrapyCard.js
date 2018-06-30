@@ -8,35 +8,53 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const styles = {
-//  card: {
-//    maxWidth: 345,
-//  },
+  card: {
+    width: '100%',
+    height: '100%',
+  },
   media: {
-    height: 0,
     paddingTop: '56.25%', // 16:9
   },
 };
 
 function SimpleMediaCard(props) {
   const { classes } = props;
+  const theme = createMuiTheme({
+    overrides: {
+      MuiCard: {
+        root: {
+          backgroundColor: '#000000',
+          width: '100%',
+          height: '100%',
+        }
+      },
+      MuiCardMedia: {
+        root: {
+          backgroundColor: '#ffffff',
+        }
+      },
+    },
+  });
+
   return (
     <Grid item xs={12} sm={6}  md={4} lg={3} xl={2}>
-      <Button href={props.url} target="_blank">
-      <Card className={classes.card} >
-        <CardMedia
-          className={classes.media}
-          image={props.img}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
-            {props.title}
-          </Typography>
-        </CardContent>
-      </Card>
-      </Button>
+      <MuiThemeProvider theme={theme}>
+        <Card className={classes.card}>
+          <CardMedia
+            className={classes.media}
+            image={props.img}
+            title="Contemplative Reptile"
+          />
+          <div class="cardTitle">
+            <a href={props.url}>
+              {props.title}
+            </a>
+          </div>
+        </Card>
+      </MuiThemeProvider>
     </Grid>
   );
 }

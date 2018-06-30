@@ -25,7 +25,7 @@ class ScrapyPjPipeline(object):
         self.client.close()
 
     def process_item(self, item, spider):
-        is_save = self.db['article'].update(
+        is_save = self.db['clip'].update(
             {u'url': item['url']},
             {"$set": dict(item)},
             upsert = True
