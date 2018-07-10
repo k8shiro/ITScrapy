@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import './App.css';
 import ScrapyCard from './ScrapyCard'
 import Grid from '@material-ui/core/Grid';
 
-class App extends Component {
+class App extends PureComponent {
   state = {
     data: []
   };
