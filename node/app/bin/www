@@ -19,6 +19,10 @@ app.set('port', port);
  * Create HTTP server.
  */
 
+process.on('uncaughtException', function(err) {
+  console.log(err);
+});
+
 var server = http.createServer(app);
 
 /**

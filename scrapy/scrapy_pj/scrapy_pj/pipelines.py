@@ -7,6 +7,9 @@
 
 from pymongo import MongoClient
 from time import sleep
+import requests
+import json
+import os
 
 class ScrapyPjPipeline(object):
     def __init__(self):
@@ -24,13 +27,48 @@ class ScrapyPjPipeline(object):
     def close_spider(self, spider): # スパイダー終了時に実行される。データベース接続を閉じる
         self.client.close()
 
+    def post_slack(self, item):
+        url = os.environ["SLACK_WEBHOOK"]
+        print(url)
+        if url != "":
+            data = json.dumps({
+                'text':  item['title'] + '\n'+ item['url'],
+                'unfurl_links': 'true'
+            })
+
+            response = requests.post(url, data=data)
+            print(response.text)
+
+    def post_mattermost(self, item):
+        url = os.environ["MATTERMOST_WEBHOOK"]
+        if url != "":
+            data = json.dumps({
+                'text':  item['title'] + '\n'+ item['url'],
+                'unfurl_links': 'true'
+            })
+
+            response = requests.post(url, data=data)
+            print(response.text)
+
     def process_item(self, item, spider):
-        is_save = self.db['clip'].update(
+        is_saved = self.db['clip'].update(
             {u'url': item['url']},
             {"$set": dict(item)},
             upsert = True
         ) # linkを検索して、なければ新規作成、あればアップデートする
 
-        sleep(3)
+        is_saved = is_saved['updatedExisting']
+
+        print("--------------------------")
+        print("title: {}".format(item['title']))
+        # is_saved=Falseで新規
+        print("is_saved: {}".format(is_saved))
+        print("--------------------------")
+
+        if is_saved == False:
+            self.post_slack(item)
+            self.post_mattermost(item)
+
+        sleep(12)
 
         return item

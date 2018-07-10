@@ -1,7 +1,6 @@
 version: '3'
 services:
   scrapy:
-    restart: always
     build:
       context: scrapy/.    
     working_dir: /scrapy/scrapy_pj
@@ -10,8 +9,10 @@ services:
       - ./scrapy/cron:/var/spool/cron/crontabs/root
     links:
       - mongo
+    environment:
+      - SLACK_WEBHOOK=${SLACK_WEBHOOK}
+      - MATTERMOST_WEBHOOK=${MATTERMOST_WEBHOOK}
   mongo:
-    restart: always
     image: mongo
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongoadmin

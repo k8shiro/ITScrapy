@@ -8,11 +8,6 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var clipRouter = require('./routes/clip');
 
-process.on('uncaughtException', function(err) {
-  console.log(err);
-});
-
-
 var app = express();
 
 // view engine setup

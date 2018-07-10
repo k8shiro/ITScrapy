@@ -10,8 +10,8 @@ class App extends Component {
 
   componentDidMount() {
     this.timerID = setInterval(
-      () => this.tick(),
-      1000
+      () => this.getCardState(),
+      10000
     );
   }
 
@@ -19,7 +19,7 @@ class App extends Component {
     clearInterval(this.timerID);
   }
 
-  tick() {
+  getCardState() {
     let urlParams = new URLSearchParams(window.location.search);
     let tag = urlParams.get('tag');
     fetch('/api/clip?tag=' + tag)
@@ -28,6 +28,7 @@ class App extends Component {
   }
 
   render() {
+    this.getCardState();
     let data_list = [];
     for(var i in this.state.data){
       let url = this.state.data[i].url

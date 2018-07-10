@@ -1,4 +1,4 @@
 mongo/data/db/*
 node_modules
 __pycache__/
-
+.env
