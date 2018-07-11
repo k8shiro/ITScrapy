@@ -21,6 +21,7 @@ services:
       - https_proxy=${PROXY}
       - HTTP_PROXY=${PROXY}
       - HTTPS_PROXY=${PROXY}
+      - TZ=Asia/Tokyo
   mongo:
     image: mongo
     environment:
@@ -28,7 +29,8 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
       - ./mongo/data/db:/data/db
-
+    environment:
+      - TZ=Asia/Tokyo
   node:
     build:
       context: ./node
