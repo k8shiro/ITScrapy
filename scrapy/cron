@@ -2,4 +2,7 @@
 30 9,15 * * * cd /scrapy/scrapy_pj; scrapy crawl article_spider -a start_url="http://www.atmarkit.co.jp/" -a allowed_domains="www.atmarkit.co.jp" -a keyword="articles" -a tag="article"
 30 10,16 * * * cd /scrapy/scrapy_pj; scrapy crawl article_spider -a start_url="http://www.itmedia.co.jp/" -a allowed_domains="www.itmedia.co.jp" -a keyword="articles" -a tag="article"
 30 7,13 * * * cd /scrapy/scrapy_pj; scrapy crawl article_spider -a start_url="https://jp.techcrunch.com/" -a allowed_domains="jp.techcrunch.com" -a keyword="techcrunch" -a tag="article"
-5 * * * * cd /scrapy/scrapy_pj; scrapy crawl connpass_spider -a start_url="https://connpass.com/api/v1/event/?order=1&count=50" -a allowed_domains="connpass.com" -a keyword="/event/" -a tag="event"
+5 01-23/2 * * * cd /scrapy/scrapy_pj; scrapy crawl event_spider -a start_url="https://connpass.com/api/v1/event/?order=1&count=50" -a allowed_domains="connpass.com" -a keyword="/event/" -a tag="event"  -a events_key="/events" -a limit_key="/limit" -a url_key="/event_url"
+5 00-23/2 * * * cd /scrapy/scrapy_pj; scrapy crawl event_spider -a start_url="http://api.doorkeeper.jp/events?locale=ja" -a allowed_domains="doorkeeper.jp" -a keyword="/events/" -a tag="event"  -a limit_key="/event/ticket_limit" -a url_key="/event/public_url"
+
+ 
