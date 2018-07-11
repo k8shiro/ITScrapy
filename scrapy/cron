@@ -2,4 +2,4 @@
 30 9,15 * * * cd /scrapy/scrapy_pj; scrapy crawl article_spider -a start_url="http://www.atmarkit.co.jp/" -a allowed_domains="www.atmarkit.co.jp" -a keyword="articles" -a tag="article"
 30 10,16 * * * cd /scrapy/scrapy_pj; scrapy crawl article_spider -a start_url="http://www.itmedia.co.jp/" -a allowed_domains="www.itmedia.co.jp" -a keyword="articles" -a tag="article"
 30 7,13 * * * cd /scrapy/scrapy_pj; scrapy crawl article_spider -a start_url="https://jp.techcrunch.com/" -a allowed_domains="jp.techcrunch.com" -a keyword="techcrunch" -a tag="article"
-5 * * * * cd /scrapy/scrapy_pj; scrapy crawl api_spider -a start_url="https://connpass.com/api/v1/event/?order=1&count=50" -a allowed_domains="connpass.com" -a keyword="/event/" -a tag="event"
+5 * * * * cd /scrapy/scrapy_pj; scrapy crawl connpass_spider -a start_url="https://connpass.com/api/v1/event/?order=1&count=50" -a allowed_domains="connpass.com" -a keyword="/event/" -a tag="event"
