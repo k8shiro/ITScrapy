@@ -21,16 +21,16 @@ services:
       - https_proxy=${PROXY}
       - HTTP_PROXY=${PROXY}
       - HTTPS_PROXY=${PROXY}
+      - no_proxy=${NOPROXY}
       - TZ=Asia/Tokyo
   mongo:
     image: mongo
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongoadmin
       - MONGO_INITDB_ROOT_PASSWORD=password
+      - TZ=Asia/Tokyo
     volumes:
       - ./mongo/data/db:/data/db
-    environment:
-      - TZ=Asia/Tokyo
   node:
     build:
       context: ./node

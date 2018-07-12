@@ -33,6 +33,7 @@ class ScrapyPjPipeline(object):
         if url != "":
             data = json.dumps({
                 'text':  item['title'] + '\n'+ item['url'],
+                'icon_emoji': ':spider:',
                 'unfurl_links': 'true'
             })
 
@@ -44,6 +45,7 @@ class ScrapyPjPipeline(object):
         if url != "":
             data = json.dumps({
                 'text':  item['title'] + '\n'+ item['url'],
+                'icon_url': 'http://pngimg.com/uploads/spider_man/spider_man_PNG24.png',
                 'unfurl_links': 'true'
             })
 
