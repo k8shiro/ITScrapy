@@ -24,7 +24,7 @@ services:
       - no_proxy=${NOPROXY}
       - TZ=Asia/Tokyo
   mongo:
-    image: mongo
+    image: mongo:3.6
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongoadmin
       - MONGO_INITDB_ROOT_PASSWORD=password

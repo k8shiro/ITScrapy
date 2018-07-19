@@ -9,6 +9,7 @@ class App extends PureComponent {
   };
 
   componentDidMount() {
+    this.getCardState();
     this.timerID = setInterval(
       () => this.getCardState(),
       10000
@@ -23,19 +24,19 @@ class App extends PureComponent {
     let urlParams = new URLSearchParams(window.location.search);
     let tag = urlParams.get('tag');
     fetch('/api/clip?tag=' + tag)
-      .then(res => res.json())
+      .then(res => res.json()).catch(function(err) {console.error(err);})
       .then(data => this.setState({ data }));
+    console.log(this.state.data)
   }
 
   render() {
-    this.getCardState();
     let data_list = [];
     for(var i in this.state.data){
       let url = this.state.data[i].url
       let img = this.state.data[i].img
       let title = this.state.data[i].title
       data_list.push(
-        <ScrapyCard title={title} url={url} img={img} />
+        <ScrapyCard title={title} url={url} img={img} key={url} />
       );
     }
 
