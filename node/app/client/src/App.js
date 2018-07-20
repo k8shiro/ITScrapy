@@ -20,9 +20,29 @@ class App extends PureComponent {
     clearInterval(this.timerID);
   }
 
+  GetQueryString() {
+    if (1 < document.location.search.length) {
+      let query = document.location.search.substring(1);
+
+      let parameters = query.split('&');
+
+      let result = {};
+      for (var i = 0; i < parameters.length; i++) {
+        let element = parameters[i].split('=');
+
+        let paramName = decodeURIComponent(element[0]);
+        let paramValue = decodeURIComponent(element[1]);
+
+        result[paramName] = decodeURIComponent(paramValue);
+      }
+      return result;
+    }
+    return null;
+  }
+
   getCardState() {
-    let urlParams = new URLSearchParams(window.location.search);
-    let tag = urlParams.get('tag');
+    let urlParams = this.GetQueryString();
+    let tag = urlParams['tag'];
     fetch('/api/clip?tag=' + tag)
       .then(res => res.json()).catch(function(err) {console.error(err);})
       .then(data => this.setState({ data }));
@@ -39,6 +59,7 @@ class App extends PureComponent {
         <ScrapyCard title={title} url={url} img={img} key={url} />
       );
     }
+
 
     return (
       <div className="App">
